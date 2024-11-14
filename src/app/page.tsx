@@ -1,16 +1,13 @@
-'use client'
-
-import CountdownTimer from './components/countdown-timer'
-import AnimatedBackground from './components/animated-background'
-import { useState } from 'react'
-
 export default function Home() {
-  const [isTimeUp, setIsTimeUp] = useState(false)
-
   return (
-    <main>
-      <AnimatedBackground isRainbowMode={isTimeUp} />
-      <CountdownTimer onTimeUp={() => setIsTimeUp(true)} onReset={() => setIsTimeUp(false)} />
+    <main className="flex min-h-screen flex-col items-center justify-center">
+      <h1 className="text-4xl font-bold text-white">Welcome to Crescentia</h1>
+      <a 
+        href="/countdown-timer" 
+        className="mt-4 text-white hover:underline"
+      >
+        Go to Timer
+      </a>
     </main>
   )
 }
