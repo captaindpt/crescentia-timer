@@ -18,7 +18,6 @@ export default function CountdownTimer({ onTimeUp, onReset }: { onTimeUp: () => 
   const [isRunning, setIsRunning] = useState<boolean>(false)
   const intervalRef = useRef<NodeJS.Timeout | null>(null)
   const inputRef = useRef<HTMLInputElement>(null)
-  const [isTimeUp, setIsTimeUp] = useState(false)
 
   const handleTimeInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     const input = e.target.value.replace(/[^0-9]/g, '') // Strip non-digits
@@ -81,20 +80,17 @@ export default function CountdownTimer({ onTimeUp, onReset }: { onTimeUp: () => 
 
   useEffect(() => {
     if (timeLeft === 0 && !isRunning) {
-      setIsTimeUp(true)
-      onTimeUp()
+      onTimeUp() // Just call onTimeUp, remove setIsTimeUp
     }
   }, [timeLeft, isRunning, onTimeUp])
-
   const handleCancel = () => {
-    setIsRunning(false)
-    setTimeLeft(INITIAL_TIME)
-    setIsTimeUp(false)
-    onReset() // Call onReset when timer is cancelled
-    if (intervalRef.current) {
-      clearInterval(intervalRef.current)
-    }
+  setIsRunning(false)
+  setTimeLeft(INITIAL_TIME)
+  onReset() // Just call onReset, remove setIsTimeUp
+  if (intervalRef.current) {
+    clearInterval(intervalRef.current)
   }
+}    
   
   const handleStart = () => setIsRunning(true)
 

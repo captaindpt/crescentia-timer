@@ -3,10 +3,10 @@
 import { useEffect, useRef } from 'react'
 
 interface AnimatedBackgroundProps {
-  isRainbowMode?: boolean
+  isRainbowMode?: boolean  // We'll implement this feature later
 }
 
-export default function AnimatedBackground({ isRainbowMode = false }: AnimatedBackgroundProps) {
+export default function AnimatedBackground({ isRainbowMode }: AnimatedBackgroundProps) {
   const canvasRef = useRef<HTMLCanvasElement>(null)
 
   useEffect(() => {
@@ -75,7 +75,7 @@ export default function AnimatedBackground({ isRainbowMode = false }: AnimatedBa
     return () => {
       window.removeEventListener('resize', resizeCanvas)
     }
-  }, [])
+  }, [isRainbowMode])
 
   return (
     <canvas
